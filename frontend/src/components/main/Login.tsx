@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../Base/Navbar";
+
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -45,9 +47,11 @@ const Login = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div
       style={{
-        backgroundImage: `url('/Images/login_background.webp')`,
+        backgroundImage: `url('/Images/login_background.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
@@ -113,6 +117,7 @@ const Login = () => {
         </p>
       </form>
     </div>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Navbar from "../Base/Navbar";
 
 interface StatCardProps {
   title: string;
@@ -47,18 +48,10 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
+    <>
+    <Navbar/>
     <div className="p-6 bg-gray-50 min-h-screen">
-      {/* Navbar */}
-      <div className="bg-blue-800 text-white px-6 py-4 flex justify-between items-center shadow">
-        <h1 className="text-xl font-bold">IOMS</h1>
-        <nav className="space-x-6 text-white font-medium">
-          <a href="/dashboard">Dashboard</a>
-          <a href="/products">Products</a>
-          <a href="/customers">Customers</a>
-          <a href="/orders">Orders</a>
-          <a href="#">Logout</a>
-        </nav>
-      </div>
+    
 
       {/* Dashboard Title */}
       <div className="mt-6 mb-4">
@@ -78,6 +71,7 @@ const Dashboard: React.FC = () => {
         <div className="text-center text-gray-400 py-16">No data</div>
       </div>
     </div>
+  </>
   );
 };
 

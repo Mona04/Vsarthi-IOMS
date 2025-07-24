@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../Base/Navbar";
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -117,6 +118,8 @@ const AddOrders: React.FC = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div
       style={{
         backgroundImage: `url("/Images/orders_background.avif")`,
@@ -202,6 +205,7 @@ const AddOrders: React.FC = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

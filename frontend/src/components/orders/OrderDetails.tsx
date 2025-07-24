@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "../Base/Navbar";
 
 interface Product {
   id: number;
   name: string;
-  price: string; // received as string from backend
+  price: string; 
 }
 
 interface OrderItem {
@@ -43,6 +44,8 @@ const OrderDetails: React.FC = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div
       style={{
         backgroundImage: "url('/Images/orders_background.avif')",
@@ -106,6 +109,7 @@ const OrderDetails: React.FC = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

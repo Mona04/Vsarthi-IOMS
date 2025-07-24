@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../Base/Navbar";
 
 interface CustomerForm {
   name: string;
@@ -65,6 +66,8 @@ function EditCustomer() {
   if (loading) return <div>Loading...</div>;
 
   return (
+    <>
+    <Navbar/>
     <div
       style={{
         backgroundImage: "url('/Images/customer_background.jpg')",
@@ -141,6 +144,7 @@ function EditCustomer() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

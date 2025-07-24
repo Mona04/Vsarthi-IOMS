@@ -1,6 +1,8 @@
 import  React,{ useState  } from "react";
 import axios from "axios";
- 
+import Navbar from "../Base/Navbar";
+
+
 const API_BASE = "http://localhost:8000/api";
  
 interface ProductForm {
@@ -50,6 +52,8 @@ const AddProduct = () => {
   };
  
  return (
+  <>
+  <Navbar/>
   <div
     style={{
       backgroundImage: "url('/Images/prod_background.jpeg')",
@@ -131,6 +135,7 @@ const AddProduct = () => {
       </button>
     </form>
     </div>
+    </>
   );
 };
  

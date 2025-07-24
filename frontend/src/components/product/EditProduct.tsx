@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
- 
+import Navbar from "../Base/Navbar";
  
 interface ProductForm {
   name: string;
@@ -71,6 +71,8 @@ function EditProduct() {
  
     if (loading) return <div>Loading...</div>;
     return (
+        <>
+        <Navbar/>
             <div className="p-6 max-w-xl mx-auto bg-white rounded shadow">
                 <h2 className="text-2xl font-bold mb-4">Edit Customer</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -136,6 +138,7 @@ function EditProduct() {
                     </div>
                 </form>
             </div>
+            </>
         )
 }
  

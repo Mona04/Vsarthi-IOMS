@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
- 
+import Navbar from "../Base/Navbar";
 const API_BASE = "http://localhost:8000/api";
  
 // Define the shape of a Customer
@@ -53,6 +53,8 @@ const Customers: React.FC = () => {
   };
  
   return (
+    <>
+    <Navbar/>
       <div
     className="p-6 min-h-screen"
     style={{
@@ -112,6 +114,7 @@ const Customers: React.FC = () => {
         )}
       </div>
     </div>
+  </>
   );
 };
  

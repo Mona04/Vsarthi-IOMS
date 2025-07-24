@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Navbar from "../Base/Navbar";
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -48,6 +49,8 @@ const Register = () => {
   };
 
   return (
+    <>
+    < Navbar/>
     <div
       style={{
         backgroundImage: `url('/Images/register_background.png')`,
@@ -126,6 +129,7 @@ const Register = () => {
         </p>
       </form>
     </div>
+    </>
   );
 };
 

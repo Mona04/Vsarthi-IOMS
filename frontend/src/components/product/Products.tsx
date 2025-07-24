@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './Products.css';
+import Navbar from "../Base/Navbar";
+
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -63,6 +65,8 @@ const Products: React.FC = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="products-background py-10 px-4">
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-4xl font-bold text-center text-black-700 mb-6 shadow hover "><b>📦 All Products</b></h1>
@@ -121,6 +125,7 @@ const Products: React.FC = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
