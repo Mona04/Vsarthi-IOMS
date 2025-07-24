@@ -52,10 +52,10 @@ const Dashboard: React.FC = () => {
       <div className="bg-blue-800 text-white px-6 py-4 flex justify-between items-center shadow">
         <h1 className="text-xl font-bold">IOMS</h1>
         <nav className="space-x-6 text-white font-medium">
-          <a href="#">Dashboard</a>
-          <a href="#">Products</a>
-          <a href="#">Customers</a>
-          <a href="#">Orders</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/products">Products</a>
+          <a href="/customers">Customers</a>
+          <a href="/orders">Orders</a>
           <a href="#">Logout</a>
         </nav>
       </div>

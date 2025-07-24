@@ -27,8 +27,12 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
+        print(request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        print("this is one.............")
+        serializer.save()
+        # self.perform_create(serializer)
+        print("this is 2..................")
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):

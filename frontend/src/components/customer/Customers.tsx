@@ -7,10 +7,9 @@ const API_BASE = "http://localhost:8000/api";
 // Define the shape of a Customer
 interface Customer {
   id: number;
-  first_name: string;
-  last_name: string;
+  name: string;
   email: string;
-  phone_number: string;
+  phone: string;
 }
  
 const Customers: React.FC = () => {
@@ -81,9 +80,9 @@ const Customers: React.FC = () => {
             <tbody>
               {customers.map((customer) => (
                 <tr key={customer.id}>
-                  <td className="py-1">{customer.first_name} {customer.last_name}</td>
+                  <td className="py-1">{customer.name} </td>
                   <td>{customer.email}</td>
-                  <td>{customer.phone_number}</td>
+                  <td>{customer.phone}</td>
                   <td className="space-x-2">
                     <button
                       className="bg-green-600 text-white px-2 py-1 rounded text-xs hover:bg-green-400 hover:text-black transition-all duration-300"

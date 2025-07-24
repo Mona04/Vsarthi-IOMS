@@ -1,23 +1,21 @@
 import  React,{ useState  } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
  
 const API_BASE = "http://localhost:8000/api";
  
 interface CustomerForm {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone_number: string;
+  username: string;
+  password: string;
 }
  
-const AddCustomer = () => {
+const Login = () => {
   const [form, setForm] = useState<CustomerForm>({
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone_number: ""
+    username: "",
+    password: ""
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const navigate = useNavigate();
  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,18 +25,25 @@ const AddCustomer = () => {
     e.preventDefault();
     setSubmitting(true);
     axios
-      .post(`${API_BASE}/customers/`, form)
-      .then(() => {
-        alert("Customer added!");
+      .post(`${API_BASE}/login/`, form)
+      .then((res) => {
+        const { token } = res.data;
+        sessionStorage.setItem("token", token);
         setForm({
-          first_name: "",
-          last_name: "",
-          email: "",
-          phone_number: ""
+          username: "",
+          password: ""
         });
+        navigate("/customer");
+ 
       })
-      .catch(() => {
-        alert("Error adding customer");
+      .catch((err: any) => {
+        if (err.response?.data?.errors?.user?.username) {
+            alert(err.response.data.errors.user.username);
+        } else if (err.response.data) {
+            alert(err.response.data);
+        }else {
+            alert("Something went wrong");
+        }
       })
       .finally(() => setSubmitting(false));
   };
@@ -47,36 +52,18 @@ const AddCustomer = () => {
     <form className="max-w-md mx-auto mt-8 p-4 bg-white rounded shadow" onSubmit={handleSubmit}>
       <input
         type="text"
-        name="first_name"
-        placeholder="First Name"
-        value={form.first_name}
+        name="username"
+        placeholder="username"
+        value={form.username}
         onChange={handleChange}
         className="border p-2 rounded w-full mb-2"
         required
       />
       <input
-        type="text"
-        name="last_name"
-        placeholder="Last Name"
-        value={form.last_name}
-        onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
-        required
-      />
-      <input
-        type="text"
-        name="phone_number"
-        placeholder="Phone Number"
-        value={form.phone_number}
+        type="password"
+        name="password"
+        placeholder="*****"
+        value={form.password}
         onChange={handleChange}
         className="border p-2 rounded w-full mb-2"
         required
@@ -86,11 +73,16 @@ const AddCustomer = () => {
         className="bg-blue-700 text-white px-4 py-2 rounded w-full"
         disabled={submitting}
       >
-        {submitting ? "Adding..." : "Add Customer"}
+        {submitting ? "Verifying..." : "Login"}
       </button>
     </form>
   );
 };
  
-export default AddCustomer;
+export default Login;
+
+ 
+
+ 
+ 
  
