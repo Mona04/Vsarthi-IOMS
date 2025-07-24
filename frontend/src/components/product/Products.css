@@ -1,0 +1,7 @@
+.products-background {
+  background-image: url('/Images/prod_background.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}

@@ -53,10 +53,18 @@ const Customers: React.FC = () => {
   };
  
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h2 className="text-3xl font-bold mb-4">All Customers</h2>
+      <div
+    className="p-6 min-h-screen"
+    style={{
+      backgroundImage: "url('/Images/customer_background.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+  >
+      <h1 className="text-5xl font-bold mb-4 text-center ">All Customers</h1>
       <button
-        className="bg-blue-600 text-white px-4 py-2 rounded m-2.5 hover:bg-blue-400 hover:text-2xl transition-all duration-500 ease-in-out"
+        className="bg-green-600 text-white font-bold px-4 py-2 rounded m-2.5 hover:bg-green-400 hover:text-2xl transition-all duration-500 ease-in-out"
         onClick={() => navigate("/customer/add")}
       >
         Add Customer

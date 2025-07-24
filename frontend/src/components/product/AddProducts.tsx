@@ -49,8 +49,28 @@ const AddProduct = () => {
       .finally(() => setSubmitting(false));
   };
  
-  return (
-    <form className="max-w-md mx-auto mt-8 p-4 bg-white rounded shadow" onSubmit={handleSubmit}>
+ return (
+  <div
+    style={{
+      backgroundImage: "url('/Images/prod_background.jpeg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "2rem"
+    }}
+  >
+    <form
+      className="bg-white bg-opacity-90 backdrop-blur-md p-8 rounded-lg shadow-lg w-full max-w-md"
+      onSubmit={handleSubmit}
+    >
+      <h1 className ="text-4xl font-bold text-center text-black-700 mb-6  "><b> Add Product Details </b></h1>
+      
+      <div className="mb-4">
+        <label className="block mb-1 font-medium">Product Name:</label>
       <input
         type="text"
         name="name"
@@ -60,7 +80,11 @@ const AddProduct = () => {
         className="border p-2 rounded w-full mb-2"
         required
       />
- 
+      </div>
+
+
+    <div className="mb-4">
+      <label className="block mb-1 font-medium">Product Price:</label> 
       <input
         type="text"
         name="price"
@@ -70,6 +94,10 @@ const AddProduct = () => {
         className="border p-2 rounded w-full mb-2"
         required
       />
+    </div>
+    
+    <div className="mb-4">
+      <label className="block mb-1 font-medium">Product Description:</label>
       <input
         type="textbox"
         name="description"
@@ -79,6 +107,10 @@ const AddProduct = () => {
         className="border p-2 rounded w-full mb-2"
         required
       />
+    </div>
+    
+    <div className="mb-4">
+      <label className="block mb-1 font-medium">Stock:</label>
       <input
         type="text"
         name="stock"
@@ -88,14 +120,17 @@ const AddProduct = () => {
         className="border p-2 rounded w-full mb-2"
         required
       />
+      </div>
+
       <button
         type="submit"
-        className="bg-blue-700 text-white px-4 py-2 rounded w-full"
+        className="bg-green-700 text-white px-4 py-2 rounded w-full"
         disabled={submitting}
       >
         {submitting ? "Adding..." : "Add Product"}
       </button>
     </form>
+    </div>
   );
 };
  
