@@ -29,10 +29,11 @@ const Login = () => {
     axios
       .post(`${API_BASE}/login/`, form)
       .then((res) => {
+        console.log("Login response:", res);
         const { token } = res.data;
         sessionStorage.setItem("token", token);
         setForm({ username: "", password: "" });
-        navigate("/customer");
+        navigate("/dashboard");
       })
       .catch((err: any) => {
         if (err.response?.data?.errors?.user?.username) {

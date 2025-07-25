@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../Base/Navbar";
+import { useNavigate } from "react-router-dom";
 const API_BASE = "http://localhost:8000/api";
 
 interface CustomerForm {
@@ -18,6 +19,7 @@ const AddCustomer = () => {
     phone: ""
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -36,6 +38,7 @@ const AddCustomer = () => {
           email: "",
           phone: ""
         });
+        navigate('/customers');
       })
       .catch(() => {
         alert("Error adding customer");

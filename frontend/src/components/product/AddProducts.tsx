@@ -1,6 +1,7 @@
 import  React,{ useState  } from "react";
 import axios from "axios";
 import Navbar from "../Base/Navbar";
+import { useNavigate } from "react-router-dom";
 
 
 const API_BASE = "http://localhost:8000/api";
@@ -19,14 +20,15 @@ const AddProduct = () => {
     product_price: 0,
     description: "",
     stock_quantity: 0,
-    
+
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
- 
+  
+  const navigate=useNavigate()
   const handleSubmit = (e :React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
@@ -46,7 +48,9 @@ const AddProduct = () => {
           description: "",
           stock_quantity: 0
         });
+        navigate('/products');
       })
+      
       .catch(() => {
         alert("Error adding product");
       })

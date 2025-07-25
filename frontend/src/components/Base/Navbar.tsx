@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar: React.FC = () => (
+
+
+const Navbar: React.FC = () =>{ 
+  const token =  sessionStorage.getItem('token')
+  return (
   <nav className="bg-transparent text-black px-6 py-4 flex justify-between items-center shadow">
     <div className="text-xl font-bold tracking-wide">Veersa IOMS</div>
     <div className="space-x-6 font-medium">
@@ -11,10 +15,12 @@ const Navbar: React.FC = () => (
       <Link to="/customers" className="hover:underline">Customers</Link>
       
       <Link to="/orders" className="hover:underline">Orders</Link>
-      <Link to="/login" className="hover:underline">Login</Link>
+      {!token && <Link to="/login" className="hover:underline">Login</Link>}
+      {token && <Link to="/" onClick={()=>sessionStorage.removeItem('token')} className="hover:underline">Logout</Link>}
+
       
     </div>
   </nav>
-);
+)};
 
 export default Navbar;
