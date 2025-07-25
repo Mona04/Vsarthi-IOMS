@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Base/Navbar";
+import { Link } from "react-router-dom";
+
 
 interface Product {
   id: number;
-  name: string;
-  price: string; 
+  product_name: string;
+  product_price: string; 
 }
 
 interface OrderItem {
@@ -38,7 +40,7 @@ const OrderDetails: React.FC = () => {
 
   const calculateTotal = (items: OrderItem[]) => {
     return items.reduce((total, item) => {
-      const price = parseFloat(item.product.price);
+      const price = parseFloat(item.product.product_price);
       return total + price * item.quantity;
     }, 0);
   };
@@ -58,6 +60,14 @@ const OrderDetails: React.FC = () => {
     >
       <div className="p-4 max-w-4xl mx-auto bg-white bg-opacity-90 rounded shadow-lg backdrop-blur">
         <h2 className="text-3xl font-bold mb-4 text-center">All Orders</h2>
+
+
+    <Link to="/orders/add">
+      <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded ml-4">
+        Add Order
+      </button>
+    </Link>
+
 
         {orders.length === 0 ? (
           <p className="text-center text-red-600">No orders found.</p>
@@ -90,11 +100,11 @@ const OrderDetails: React.FC = () => {
                 <tbody>
                   {order.items.map((item, idx) => (
                     <tr key={idx}>
-                      <td className="px-2 py-1 border">{item.product.name}</td>
-                      <td className="px-2 py-1 border">₹{item.product.price}</td>
+                      <td className="px-2 py-1 border">{item.product.product_name}</td>
+                      <td className="px-2 py-1 border">₹{item.product.product_price}</td>
                       <td className="px-2 py-1 border">{item.quantity}</td>
                       <td className="px-2 py-1 border">
-                        ₹{(parseFloat(item.product.price) * item.quantity).toFixed(2)}
+                        ₹{(parseFloat(item.product.product_price) * item.quantity).toFixed(2)}
                       </td>
                     </tr>
                   ))}

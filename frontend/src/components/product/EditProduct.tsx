@@ -4,20 +4,20 @@ import axios from "axios";
 import Navbar from "../Base/Navbar";
  
 interface ProductForm {
-  name: string;
-  price: number;
+  product_name: string;
+  product_price: number;
   description: string;
-  stock: number;
+  stock_quantity: number;
 }
  
 function EditProduct() {
  
     const { id }=useParams();
     const [product, setProducts] = useState<ProductForm>({
-        name:"",
-        price: 0,
+        product_name:"",
+        product_price: 0,
         description: "",
-        stock: 0
+        stock_quantity: 0
     });
     const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -57,7 +57,7 @@ function EditProduct() {
         })
             .then(() => {
                 alert("Product updated successfully!");
-                navigate("/product/");
+                navigate("/products/");
             })
             .catch((err) => {
                 console.error("Error updating customer:", err);
@@ -74,14 +74,14 @@ function EditProduct() {
         <>
         <Navbar/>
             <div className="p-6 max-w-xl mx-auto bg-white rounded shadow">
-                <h2 className="text-2xl font-bold mb-4">Edit Customer</h2>
+                <h2 className="text-2xl font-bold mb-4">Edit Product</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                     <label className="block font-medium">Product Name</label>
                     <input
                         type="text"
-                        name="name"
-                        value={product.name}
+                        name="product_name"
+                        value={product.product_name}
                         onChange={handleChange}
                         className="w-full border px-3 py-2 rounded"
                         required
@@ -91,8 +91,8 @@ function EditProduct() {
                     <label className="block font-medium">Price</label>
                     <input
                         type="text"
-                        name="price"
-                        value={product.price}
+                        name="product_price"
+                        value={product.product_price}
                         onChange={handleChange}
                         className="w-full border px-3 py-2 rounded"
                         required
@@ -113,8 +113,8 @@ function EditProduct() {
                     <label className="block font-medium">Available Stock</label>
                     <input
                         type="text"
-                        name="stock"
-                        value={product.stock}
+                        name="stock_quantity"
+                        value={product.stock_quantity}
                         onChange={handleChange}
                         className="w-full border px-3 py-2 rounded"
                         required
@@ -124,6 +124,7 @@ function EditProduct() {
                     <button
                         type="submit"
                         disabled={saving}
+                        onClick={() => navigate("/products")}
                         className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500"
                     >
                         {saving ? "Saving..." : "Update Product"}

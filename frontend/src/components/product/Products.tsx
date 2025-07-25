@@ -9,10 +9,10 @@ const API_BASE = "http://localhost:8000/api";
 
 interface Product {
   id: number;
-  name: string;
-  price: number;
+  product_name: string;
+  product_price: number;
   description: string;
-  stock: number;
+  stock_quantity: number;
 }
 
 const Products: React.FC = () => {
@@ -100,18 +100,25 @@ const Products: React.FC = () => {
                     key={product.id}
                     className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
                   >
-                    <td className="p-3">{product.name}</td>
-                    <td className="p-3">₹{product.price.toFixed(2)}</td>
-                    <td className="p-3">{product.stock}</td>
+                    <td className="p-3">{product.product_name}</td>
+                      <td className="p-3">
+            ₹
+            {product.product_price && !isNaN(Number(product.product_price))
+              ? Number(product.product_price).toFixed(2)
+              : "N/A"}
+          </td>
+
+
+                    <td className="p-3">{product.stock_quantity}</td>
                     <td className="p-3 space-x-2">
                       <button
-                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-400 hover:scale-105 transition-all"
+                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-300 hover:scale-105 transition-all"
                         onClick={() => handleEdit(product.id)}
                       >
                         ✏️ Edit
                       </button>
                       <button
-                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-400 hover:scale-105 transition-all"
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-300 hover:scale-105 transition-all"
                         onClick={() => handleDelete(product.id)}
                       >
                         🗑️ Delete

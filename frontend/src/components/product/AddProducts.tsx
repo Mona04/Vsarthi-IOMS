@@ -6,19 +6,20 @@ import Navbar from "../Base/Navbar";
 const API_BASE = "http://localhost:8000/api";
  
 interface ProductForm {
-  name: string;
-  price: number;
+  product_name: string;
+  product_price: number;
   description: string;
-  stock: number;
+  stock_quantity: number;
 }
  
  
 const AddProduct = () => {
   const [form, setForm] = useState<ProductForm>({
-    name: "",
-    price: 0,
+    product_name: "",
+    product_price: 0,
     description: "",
-    stock: 0
+    stock_quantity: 0,
+    
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
  
@@ -30,6 +31,7 @@ const AddProduct = () => {
     e.preventDefault();
     setSubmitting(true);
     const token = sessionStorage.getItem("token");
+    console.log(form)
     axios
       .post(`${API_BASE}/products/`, form ,{
         headers: {
@@ -39,10 +41,10 @@ const AddProduct = () => {
       .then(() => {
         alert("Product added!");
         setForm({
-          name: "",
-          price: 0,
+          product_name: "",
+          product_price: 0,
           description: "",
-          stock: 0
+          stock_quantity: 0
         });
       })
       .catch(() => {
@@ -77,9 +79,9 @@ const AddProduct = () => {
         <label className="block mb-1 font-medium">Product Name:</label>
       <input
         type="text"
-        name="name"
+        name="product_name"
         placeholder="Product name"
-        value={form.name}
+        value={form.product_name}
         onChange={handleChange}
         className="border p-2 rounded w-full mb-2"
         required
@@ -91,9 +93,9 @@ const AddProduct = () => {
       <label className="block mb-1 font-medium">Product Price:</label> 
       <input
         type="text"
-        name="price"
+        name="product_price"
         placeholder="100"
-        value={form.price}
+        value={form.product_price}
         onChange={handleChange}
         className="border p-2 rounded w-full mb-2"
         required
@@ -117,9 +119,9 @@ const AddProduct = () => {
       <label className="block mb-1 font-medium">Stock:</label>
       <input
         type="text"
-        name="stock"
+        name="stock_quantity"
         placeholder="6"
-        value={form.stock}
+        value={form.stock_quantity}
         onChange={handleChange}
         className="border p-2 rounded w-full mb-2"
         required

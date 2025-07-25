@@ -6,12 +6,12 @@ const API_BASE = "http://localhost:8000/api";
 
 interface Product {
   id: number;
-  name: string;
+  product_name: string;
 }
 
 interface Customer {
   id: number;
-  first_name: string;
+  name: string;
 }
 
 interface OrderItem {
@@ -143,7 +143,7 @@ const AddOrders: React.FC = () => {
             <option value={0}>-- Choose Customer --</option>
             {customers.map((customer) => (
               <option key={customer.id} value={customer.id}>
-                {customer.first_name}
+                {customer.name}
               </option>
             ))}
           </select>
@@ -159,7 +159,7 @@ const AddOrders: React.FC = () => {
             <option value={0}>Select product</option>
             {products.map((product) => (
               <option key={product.id} value={product.id}>
-                {product.name}
+                {product.product_name}
               </option>
             ))}
           </select>
@@ -189,7 +189,7 @@ const AddOrders: React.FC = () => {
                 const product = products.find((p) => p.id === item.product_id);
                 return (
                   <li key={idx}>
-                    {product?.name || "Product"} — Quantity: {item.quantity}
+                    {product?.product_name || "Product"} — Quantity: {item.quantity}
                   </li>
                 );
               })}
@@ -199,7 +199,7 @@ const AddOrders: React.FC = () => {
 
         <button
           onClick={handleSubmit}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full"
+          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full"
         >
           Submit Order
         </button>
