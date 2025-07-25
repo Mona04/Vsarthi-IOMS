@@ -105,7 +105,7 @@ const Dashboard: React.FC = () => {
             <ul className="list-disc list-inside space-y-1">
               {topProducts.map((product, idx) => (
                 <li key={idx}>
-                  {product.name} – {product.quantity || product.sold || 0} sold
+                  {product.name} - {product.quantity || product.sold || 0} sold
                 </li>
               ))}
             </ul>

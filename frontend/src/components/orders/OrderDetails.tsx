@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Base/Navbar";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 interface Product {
@@ -23,9 +24,14 @@ interface Order {
 
 const OrderDetails: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchOrders = async () => {
+
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
       try {
         const res = await fetch("http://localhost:8000/api/orders/");
         const data = await res.json();
@@ -35,9 +41,6 @@ const OrderDetails: React.FC = () => {
       }
     };
 
-    fetchOrders();
-  }, []);
-
   const calculateTotal = (items: OrderItem[]) => {
     return items.reduce((total, item) => {
       const price = parseFloat(item.product.product_price);
@@ -45,6 +48,39 @@ const OrderDetails: React.FC = () => {
     }, 0);
   };
 
+  const handleStatusChange = (orderId: string, newStatus: string) => {
+    setUpdatingStatusId(orderId);
+ 
+    axios.patch(
+      `http://localhost:8000/api/orders/${orderId}/`,
+      { status: newStatus },
+      {
+        headers: { Authorization: `Token ${sessionStorage.getItem("token")}` },
+      }
+    )
+      .then(() => {
+        alert("Order updated successfully!");
+        fetchOrders(); // Refresh the order list
+      })
+      .catch((err) => {
+        console.error("Error updating order:", err);
+        alert("Failed to update order.");
+      })
+      .finally(() => {
+        setUpdatingStatusId(null);
+      });
+  };
+
+  const getNextStatuses = (currentStatus: string): string[] => {
+    const transitions: { [key: string]: string[] } = {
+      PENDING: ["PENDING", "PROCESSING", "CANCELED"],
+      PROCESSING: ["PROCESSING", "SHIPPED", "DELIVERED", "CANCELED"],
+      SHIPPED: ["SHIPPED", "DELIVERED"],
+      DELIVERED: ["DELIVERED"],
+      CANCELED: ["CANCELED"],
+    };
+    return transitions[currentStatus] || [currentStatus];
+  };
   return (
     <>
     <Navbar/>
@@ -95,6 +131,7 @@ const OrderDetails: React.FC = () => {
                     <th className="px-2 py-1 border">Price</th>
                     <th className="px-2 py-1 border">Quantity</th>
                     <th className="px-2 py-1 border">Subtotal</th>
+                    <th className="px-2 py-1 border">Status</th> 
                   </tr>
                 </thead>
                 <tbody>
@@ -105,6 +142,20 @@ const OrderDetails: React.FC = () => {
                       <td className="px-2 py-1 border">{item.quantity}</td>
                       <td className="px-2 py-1 border">
                         ₹{(parseFloat(item.product.product_price) * item.quantity).toFixed(2)}
+                      </td>
+                      <td className="px-2 py-1 border">
+                        <select
+                          value={order.status}
+                          disabled={updatingStatusId === order.id}
+                          onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                          className="border p-1 rounded gap-1.5 m-2"
+                        >
+                          {getNextStatuses(order.status).map((status) => (
+                            <option key={status} value={status}>
+                              {status}
+                            </option>
+                          ))}
+                        </select>
                       </td>
                     </tr>
                   ))}
