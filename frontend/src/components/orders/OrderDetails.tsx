@@ -20,12 +20,13 @@ interface Order {
   customer_id: number;
   created_at: string;
   items: OrderItem[];
+  status: string;
 }
 
 const OrderDetails: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
-
+  
   useEffect(() => {
 
     fetchOrders();
@@ -86,7 +87,7 @@ const OrderDetails: React.FC = () => {
     <Navbar/>
     <div
       style={{
-        backgroundImage: "url('/Images/orders_background.avif')",
+        backgroundImage: "url('/Images/orders_background.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

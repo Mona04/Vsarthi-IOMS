@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../Base/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -25,6 +26,7 @@ interface OrderData {
 }
 
 const AddOrders: React.FC = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [selectedCustomerId, setSelectedCustomerId] = useState<number>(0);
@@ -112,6 +114,7 @@ const AddOrders: React.FC = () => {
 
       setSelectedCustomerId(0);
       setOrderItems([]);
+      navigate("/orders");
     } catch (err) {
       console.error("Submit error:", err);
     }
@@ -122,7 +125,7 @@ const AddOrders: React.FC = () => {
     <Navbar/>
     <div
       style={{
-        backgroundImage: `url("/Images/orders_background.avif")`,
+        backgroundImage: `url("/Images/orders_background.webp")`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         minHeight: "100vh",
@@ -197,7 +200,7 @@ const AddOrders: React.FC = () => {
           </div>
         )}
 
-        <button
+        <button 
           onClick={handleSubmit}
           className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full"
         >
