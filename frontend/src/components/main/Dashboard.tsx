@@ -8,9 +8,9 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ title, value }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md w-full sm:w-auto">
-    <h4 className="text-gray-500 text-md">{title}</h4>
-    <p className="text-2xl font-semibold">{value}</p>
+  <div className="hover:bg-blue-100 text-2xl bg-white m-5 p-6 rounded-lg shadow-md w-full sm:w-auto border">
+    <h4 className="text-blue-800 text-md font-bold ">{title}</h4>
+    <p className="text-3xl font-bold">{value}</p>
   </div>
 );
 
@@ -26,7 +26,7 @@ interface Product {
 const Dashboard: React.FC = () => {
   const [ordersCount, setOrdersCount] = useState(0);
   const [revenue, setRevenue] = useState(0);
-  const [productsCount, setProductsCount] = useState(0);
+  // const [productsCount, setProductsCount] = useState(0);
   const [customersCount, setCustomersCount] = useState(0);
   const [topProducts, setTopProducts] = useState<Product[]>([]);
   const [lowStock, setLowStock] = useState<Product[]>([]);
@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
     });
   }, []);
   const backgroundStyle: React.CSSProperties = {
-    backgroundImage: `url('/Images/dashboard_background.webp')`,
+    backgroundImage: "url('/Images/dashboard_background.webp')",
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     minHeight: '100vh',
@@ -71,24 +71,25 @@ const Dashboard: React.FC = () => {
     <>
       <Navbar />
       <div style={backgroundStyle}>
-        <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-lg">
+        <div className="hover:bg-gray-500 bg-white bg-opacity-80 p-6 rounded-lg shadow-lg border ">
           {/* Dashboard Title */}
-          <h2 className="text-3xl font-bold mb-6">Dashboard</h2>
+          <h2 className="text-4xl font-bold text-center mb-6">Dashboard</h2>
 
-          {/* Metric Cards */}
+    
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <StatCard title="Orders This Month" value={ordersCount} />
             <StatCard title="Revenue" value={`$${revenue.toFixed(2)}`} />
-            <StatCard title="Active Products" value={productsCount} />
+            {/* <StatCard title="Active Products" value={productsCount} /> */}
             <StatCard title="Total Customers" value={customersCount} />
           </div>
 
           {/* Top Products */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 className="text-xl font-semibold mb-4">Top 5 Selling Products</h3>
+          <div className="hover:bg-blue-100 bg-white p-6 rounded-lg shadow-md mb-6 border ">
+            <h3 className="text-2xl font-bold mb-4">Top 5 Selling Products</h3>
             <ul className="list-disc list-inside space-y-1">
               {topProducts.map((product, idx) => (
-                <li key={idx}>
+                <li key={idx}
+                className="hover:bg-gray-100 px-3 py-1 rounded transition">
                   {product.product_name} - {product.stock_quantity || product.total_sold || 0} sold
                 </li>
               ))}
@@ -96,12 +97,13 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Low Stock */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-red-600">Low Stock Warnings</h3>
+          <div className="hover:bg-blue-100 bg-white p-6 rounded-lg shadow-md border ">
+            <h3 className="text-2xl font-bold mb-4 text-red-600">Low Stock Warnings</h3>
             {lowStock.length ? (
               <ul className="list-disc list-inside space-y-1 text-red-500">
                 {lowStock.map((item, idx) => (
-                  <li key={idx}>
+                  <li key={idx}
+                  className="hover:bg-gray-100 px-3 py-1 rounded transition">
                     {item.product_name} - Only {item.stock_quantity} left
                   </li>
                 ))}

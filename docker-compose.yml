@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ioms-backend
+    networks:
+      - net-ioms-veersa
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ioms-frontend
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - net-ioms-veersa
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app         
+      - /app/node_modules 
+
+networks:
+  net-ioms-veersa:
+    driver: bridge

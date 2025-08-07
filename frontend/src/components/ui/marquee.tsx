@@ -1,4 +1,5 @@
-import React, { ReactNode, HTMLAttributes } from "react";
+import React from "react";
+import type { ReactNode, HTMLAttributes } from "react";
 import type { ClassValue } from "clsx";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";

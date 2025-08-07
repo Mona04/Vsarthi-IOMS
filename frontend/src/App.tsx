@@ -19,7 +19,8 @@ import EditProduct from './components/product/EditProduct.tsx';
 import OrderDetails from './components/orders/OrderDetails.tsx';
 
 function App() {
-  const heroRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null!);
+
 
   return (
 
