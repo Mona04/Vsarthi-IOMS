@@ -12,7 +12,7 @@ services:
       - ./backend:/app
 
   frontend:
-    build: 
+    build:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: ioms-frontend

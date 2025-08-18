@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 interface Product {
   id: number;
   product_name: string;
@@ -34,7 +36,7 @@ const OrderDetails: React.FC = () => {
 
   const fetchOrders = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/orders/");
+        const res = await fetch(`${API_BASE}/orders/`);
         const data = await res.json();
         setOrders(data);
       } catch (error) {
@@ -53,7 +55,7 @@ const OrderDetails: React.FC = () => {
     setUpdatingStatusId(orderId);
  
     axios.patch(
-      `http://localhost:8000/api/orders/${orderId}/`,
+      `${API_BASE}/orders/${orderId}/`,
       { status: newStatus },
       {
         headers: { Authorization: `Token ${sessionStorage.getItem("token")}` },

@@ -3,6 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Base/Navbar";
 
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 interface CustomerForm {
   name: string;
   email: string;
@@ -24,7 +27,7 @@ function EditCustomer() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/customers/${id}/`)
+      .get(`${API_BASE}/customers/${id}/`)
       .then((res) => {
         setCustomer(res.data);
         setLoading(false);
@@ -49,7 +52,7 @@ function EditCustomer() {
     e.preventDefault();
     setSaving(true);
     axios
-      .put(`http://localhost:8000/api/customers/${id}/`, customer)
+      .put(`${API_BASE}/customers/${id}/`, customer)
       .then(() => {
         alert("Customer updated successfully!");
         navigate("/customers");

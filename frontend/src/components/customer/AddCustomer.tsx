@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../Base/Navbar";
 import { useNavigate } from "react-router-dom";
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 interface CustomerForm {
   name: string;

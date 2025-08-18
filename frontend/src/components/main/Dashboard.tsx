@@ -31,7 +31,7 @@ const Dashboard: React.FC = () => {
   const [topProducts, setTopProducts] = useState<Product[]>([]);
   const [lowStock, setLowStock] = useState<Product[]>([]);
   
-  const API_BASE = "http://localhost:8000/api";
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     // Orders
     axios.get(`${API_BASE}/orders/count-this-month/`)

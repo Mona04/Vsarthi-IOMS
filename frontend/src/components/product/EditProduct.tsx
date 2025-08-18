@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Base/Navbar";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
  
 interface ProductForm {
   product_name: string;
@@ -24,7 +26,7 @@ function EditProduct() {
     const [saving, setSaving] = useState<boolean>(false);
  
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/products/${id}/`,{
+        axios.get(`${API_BASE}/products/${id}/`,{
             headers: {
                 Authorization: `Token ${sessionStorage.getItem("token")}`
             }
@@ -52,7 +54,7 @@ function EditProduct() {
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault ();
         setSaving(true);
-        axios.put(`http://localhost:8000/api/products/${id}/`, product ,{
+        axios.put(`${API_BASE}/products/${id}/`, product ,{
             headers: { Authorization: `Token ${sessionStorage.getItem("token")}` }
         })
             .then(() => {

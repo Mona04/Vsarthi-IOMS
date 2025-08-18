@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Navbar from "../Base/Navbar";
-
-const API_BASE = "http://localhost:8000/api";
+import { useNavigate } from "react-router-dom";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 interface CustomerForm {
   username: string;
@@ -12,6 +12,7 @@ interface CustomerForm {
 }
 
 const Register = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState<CustomerForm>({
     username: "",
     email: "",
@@ -35,6 +36,7 @@ const Register = () => {
           email: "",
           password: "",
         });
+        navigate('/login');
       })
       .catch((err: any) => {
         if (err.response?.data?.errors?.user?.username) {

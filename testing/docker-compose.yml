@@ -1,0 +1,23 @@
+services:
+  backend:
+    image: meetarora10/v-ioms-backend
+    container_name: v-ioms-backend
+    ports:
+      - "8000:8000"
+    networks:
+      - net-ioms-veersa
+    
+  frontend:
+    image: meetarora10/v-ioms-frontend
+    container_name: v-ioms-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000/api
+    networks:
+      - net-ioms-veersa
+
+
+networks:
+  net-ioms-veersa:
+    driver: bridge
