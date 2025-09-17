@@ -84,41 +84,58 @@ const AddOrders: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    if (selectedCustomerId === 0 || orderItems.length === 0) {
-      alert("Please select a customer and add at least one product.");
+  if (selectedCustomerId === 0 || orderItems.length === 0) {
+    alert("Please select a customer and add at least one product.");
+    return;
+  }
+
+  const orderData: OrderData = {
+    customer_id: selectedCustomerId,
+    items: orderItems,
+  };
+
+  try {
+    const response = await fetch(`${API_BASE}/orders/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${sessionStorage.getItem("token")}`, 
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to place order.";
+      try {
+        const errorData = await response.json();
+
+        if (errorData.detail) {
+          errorMessage = errorData.detail;
+        } else if (typeof errorData === "string") {
+          errorMessage = errorData;
+        } else {
+          errorMessage = JSON.stringify(errorData);
+        }
+      } catch {
+      
+        errorMessage = "Unexpected server error.";
+      }
+      alert(errorMessage);
       return;
     }
 
-    const orderData: OrderData = {
-      customer_id: selectedCustomerId,
-      items: orderItems,
-    };
+    const result = await response.json();
+    console.log("Order placed:", result);
 
-    try {
-      const response = await fetch(`${API_BASE}/orders/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
-      });
+    setSelectedCustomerId(0);
+    setOrderItems([]);
+    navigate("/orders");
+  } catch (err) {
+    console.error("Submit error:", err);
+    alert("Network error while placing order.");
+  }
+};
 
-      if (!response.ok) {
-        const error = await response.json();
-        console.error("Order submission failed:", error);
-        return;
-      }
-
-      const result = await response.json();
-      console.log("Order placed:", result);
-
-      setSelectedCustomerId(0);
-      setOrderItems([]);
-      navigate("/orders");
-    } catch (err) {
-      console.error("Submit error:", err);
-    }
-  };
 
   return (
     <>

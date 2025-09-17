@@ -9,8 +9,6 @@ class AdminUser(models.Model):
     def __str__(self):
         return self.user.username
 
-
-
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)

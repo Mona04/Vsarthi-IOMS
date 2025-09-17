@@ -38,8 +38,8 @@ const Login = () => {
       .catch((err: any) => {
         if (err.response?.data?.errors?.user?.username) {
           alert(err.response.data.errors.user.username);
-        } else if (err.response.data) {
-          alert(err.response.data);
+        // } else if (err.response.data) {
+        //   alert(err.response.data);
         } else {
           alert("Something went wrong");
         }
@@ -108,7 +108,7 @@ const Login = () => {
 
 
         <p className="text-sm text-center mt-4">
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <a
             href="/register"
             className="text-blue-700 font-semibold hover:underline"

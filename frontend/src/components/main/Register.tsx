@@ -29,7 +29,7 @@ const Register = () => {
     axios
       .post(`${API_BASE}/admin-users/`, { user: form })
       .then(() => {
-        alert("Customer added!");
+        alert("Registered successfully! Please login.");
         setForm({
           username: "",
           email: "",

@@ -117,6 +117,9 @@ const AddCustomer = () => {
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-green-400"
             required
+            pattern="^[0-9]{10}$"
+            maxLength={10}
+            title="Please enter a valid 10-digit phone number"
           />
         </div>
 

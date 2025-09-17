@@ -13,6 +13,9 @@ interface Product {
   product_price: number;
   description: string;
   stock_quantity: number;
+  sku : string;
+  isActive : boolean;
+
 }
 
 const Products: React.FC = () => {
@@ -90,8 +93,11 @@ const Products: React.FC = () => {
                 <tr className="bg-blue-100 text-blue-800">
                   <th className="p-3 border-b text-left">Name</th>
                   <th className="p-3 border-b text-left">Price (₹)</th>
-                  <th className="p-3 border-b text-left">Stock</th>
+                  <th className = "p-3 border-b text-left">SKU</th>
+                  
                   <th className="p-3 border-b text-left">Actions</th>
+                  <th className="p-3 border-b text-left">Stock</th>
+                  <th className = "p-3 border-b text-left">Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -107,7 +113,8 @@ const Products: React.FC = () => {
               ? Number(product.product_price).toFixed(2)
               : "N/A"}
           </td>
-
+                    <td className="p-3">{product.sku}</td>
+                    <td className="p-3">{product.isActive ? "Active" : "Inactive"}</td>
 
                     <td className="p-3">{product.stock_quantity}</td>
                     <td className="p-3 space-x-2">
@@ -124,6 +131,7 @@ const Products: React.FC = () => {
                         🗑️ Delete
                       </button>
                     </td>
+
                   </tr>
                 ))}
               </tbody>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../Base/Navbar";
 const API_BASE = "http://localhost:8000/api";
  
-// Define the shape of a Customer
+//  A typeScript Interface that Define the shape of a Customer
 interface Customer {
   id: number;
   name: string;

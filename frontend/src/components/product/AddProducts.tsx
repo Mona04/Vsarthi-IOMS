@@ -11,6 +11,8 @@ interface ProductForm {
   product_price: number;
   description: string;
   stock_quantity: number;
+  sku : string;
+  isActive ?: boolean;
 }
  
  
@@ -20,7 +22,8 @@ const AddProduct = () => {
     product_price: 0,
     description: "",
     stock_quantity: 0,
-
+    sku : "",
+    isActive : true,
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
  
@@ -46,7 +49,9 @@ const AddProduct = () => {
           product_name: "",
           product_price: 0,
           description: "",
-          stock_quantity: 0
+          stock_quantity: 0,
+          sku : "",
+          isActive : true,
         });
         navigate('/products');
       })
@@ -117,8 +122,14 @@ const AddProduct = () => {
         className="border p-2 rounded w-full mb-2"
         required
       />
+    </div >
+
+
+    <div className ="mb-4">
+      <label className="block mb-1 font-medium">SKU:</label>
+    <input type = "text" name = "sku" placeholder = "SKU" value = {form.sku} onChange = {handleChange} className= "border p-2 rounded w-full mb-2" required/>
     </div>
-    
+
     <div className="mb-4">
       <label className="block mb-1 font-medium">Stock:</label>
       <input
@@ -132,6 +143,12 @@ const AddProduct = () => {
       />
       </div>
 
+    <div className="mb-4">
+      <label className="block mb-1 font-medium">Active:</label>
+    <input type = "checkbox" name = "isActive" id = "isActive" checked = {form.isActive} onChange = {handleChange}/>
+    </div>
+
+    
       <button
         type="submit"
         className="bg-green-700 text-white px-4 py-2 rounded w-full"

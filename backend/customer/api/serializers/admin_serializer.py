@@ -31,8 +31,8 @@ class AdminSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Email already in use")
 
         user = User(**user_data)
-        user.set_password(password)
-        user.is_staff=True
+        user.set_password(password)   # auto-hash the password
+        user.is_staff=True    
         user.is_active=True
         user.save()
 

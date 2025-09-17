@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Form } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Base/Navbar";
  
@@ -8,6 +8,8 @@ interface ProductForm {
   product_price: number;
   description: string;
   stock_quantity: number;
+  sku : string;
+  isActive ?: boolean;
 }
  
 function EditProduct() {
@@ -17,7 +19,9 @@ function EditProduct() {
         product_name:"",
         product_price: 0,
         description: "",
-        stock_quantity: 0
+        stock_quantity: 0,
+        sku : "",
+        isActive : true,
     });
     const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -119,6 +123,29 @@ function EditProduct() {
                         className="w-full border px-3 py-2 rounded"
                         required
                     />
+                    </div>
+                    <div>
+                        <label className="block font-medium">SKU</label>
+                        <input
+                            type="text"
+                            name="sku"
+                            placeholder="SKU"
+                            value = {product.sku}
+                            onChange = {handleChange}
+                            className = "w-full border px-3 py-2 rounded"
+                            required
+                        />
+
+                    </div>
+                    <div>
+                        <input type = "checkbox" name = "isActive" id = "isActive" checked = {product.isActive} 
+                        onChange = {(e) =>
+                            setProducts({
+                                ...product,
+                                isActive: e.target.checked
+                            })
+                        }/>
+                        <label className="ml-2 font-medium">Active</label>
                     </div>
                     <div className="flex justify-between items-center">
                     <button

@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: VSarthi_backend
+    ports:
+      - "8000:8000"
+    networks:
+      - iomsnetwork
+   
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: VSarthi_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev -- --host 0.0.0.0
+    depends_on:
+      - backend
+    networks:
+      - iomsnetwork
+ 
+networks:
+  iomsnetwork:
+    driver: bridge

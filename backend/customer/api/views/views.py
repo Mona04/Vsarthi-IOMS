@@ -11,14 +11,14 @@ class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
-    # customer list
+
     def list(self, request):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
 
-    # customer detail view
+
     def retrieve(self, request, pk=None):
         customer = self.get_object()
         serializer = self.get_serializer(customer)
@@ -31,7 +31,6 @@ class CustomerViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         print("this is one.............")
         serializer.save()
-        # self.perform_create(serializer)
         print("this is 2..................")
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 

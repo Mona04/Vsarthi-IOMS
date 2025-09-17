@@ -4,12 +4,6 @@ import './index.css'
 import App from './App.tsx'
  
 import { BrowserRouter } from 'react-router-dom'
-// import Customers from './components/Customers.jsx'
-// import AddCustomer from './components/AddCustomer.tsx'
-// import EditCustomer from './components/EditCustomer.tsx'
-// import Register from './components/main/Register.tsx'
-// import Login from './components/main/Login.tsx'
- 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
